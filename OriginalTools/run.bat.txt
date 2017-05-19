@@ -1,0 +1,24 @@
+@echo off
+
+echo =============================
+echo Running CaptureCryptGenRandom
+echo =============================
+WIN2000_DEBUG\CaptureCryptGenRandom.exe            || echo CaptureCryptGenRandom FAILED
+
+echo ===========================
+echo Running NextCryptGenOutputs
+echo ===========================
+WIN2000_DEBUG\NextCryptGenOutputs.exe              || echo NextCryptGenOutputs FAILED
+
+echo =====================================
+echo Running PreviousCryptGenOutputs
+echo =====================================
+WIN2000_DEBUG\PreviousCryptGenOutputs.exe    || echo PreviousCryptGenOutputs FAILED
+
+echo =============================================
+echo Comparing actual outputs with the simulator's
+echo =============================================
+diff -q -s actual.txt next_outputs.txt             || echo NextCryptGenOutputs FAILED
+diff -q -s actual.txt previous_outputs.txt         || echo PreviousCryptGenOutputs FAILED
+
+
